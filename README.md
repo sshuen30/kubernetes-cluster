@@ -1,5 +1,5 @@
 ## Setting up Kubernetes-cluster
-### Do the following for master node and all workernodes
+### 1) Do the following for master node and all workernodes
 
 - Disable swap
 ```bash
