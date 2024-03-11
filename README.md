@@ -102,6 +102,7 @@ sudo systemctl enable kubelet.service
 
 ### 2) Do the following for master node and all workernodes
 - Initialize the Kubernetes cluster on the master node
+- When initializing Kubeadm on the master node, you will receive a token that you can use to add worker nodes
 ```bash
 sudo kubeadm config images pull
 
@@ -126,4 +127,15 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/custom-resources.yaml -O
 ```
 
+- Use the sed command to change the default CIDR value in the Calico custom resources to match the CIDR you used in the kubeadm init command
+```bash
+sed -i 's/cidr: 192\.168\.0\.0\/16/cidr: 10.10.0.0\/16/g' custom-resources.yaml
+```
+
+- Tell kubectl to create the resources defined in the custom-resources.yaml file
+```bash
+kubectl create -f custom-resources.yaml
+```
+
+At this point, you can go into the worker nodes and use kubeadm join command to join the master node.
 
