@@ -104,5 +104,26 @@ sudo systemctl enable kubelet.service
 - Initialize the Kubernetes cluster on the master node
 ```bash
 sudo kubeadm config images pull
+
+# The --pod-network-cidr flag is setting the IP address range for the pod network
+sudo kubeadm init --pod-network-cidr=10.10.0.0/16
 ```
+
+- Create the .kube directory in your home folder and copy the cluster's admin configuration to your personal .kube directory.
+- Next, change the ownership of the copied configuration file to give the user the permission to use the configuration file to interact with the cluster.
+```bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+- Configure kubectl and Calico
+```bash
+# deploy the calico operator
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
+
+# download the custom resource file for calico
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/custom-resources.yaml -O
+```
+
 
