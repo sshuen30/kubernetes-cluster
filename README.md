@@ -100,4 +100,9 @@ sudo systemctl enable kubelet.service
 
 ------------------------------------------------------------------------------------------------------------
 
-### Do the following for master node and all workernodes
+### 2) Do the following for master node and all workernodes
+- Initialize the Kubernetes cluster on the master node
+```bash
+sudo kubeadm config images pull
+```
+
