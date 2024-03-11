@@ -137,5 +137,9 @@ sed -i 's/cidr: 192\.168\.0\.0\/16/cidr: 10.10.0.0\/16/g' custom-resources.yaml
 kubectl create -f custom-resources.yaml
 ```
 
-At this point, you can go into the worker nodes and use kubeadm join command to join the master node.
+- At this point, you can go into the worker nodes and use kubeadm join command to join the master node
+- You can use the following to generate the original command on your master node
+```bash
+kubeadm token create --print-join-command
+```
 
