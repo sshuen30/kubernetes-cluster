@@ -100,7 +100,7 @@ sudo systemctl enable kubelet.service
 
 ------------------------------------------------------------------------------------------------------------
 
-### 2) Do the following for master node and all workernodes
+### 2) Do the following for master node
 - Initialize the Kubernetes cluster on the master node
 - When initializing Kubeadm on the master node, you will receive a token that you can use to add worker nodes
 ```bash
