@@ -1,6 +1,13 @@
 ## Setting up Kubernetes-cluster
 ### 1) Do the following for master node and all workernodes
 
+- Update and Upgrade
+```
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install qemu-guest-agent -y
+```
+
 - Disable swap
 ```bash
 sudo swapoff -a
@@ -47,30 +54,32 @@ sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl
 ```
 
-- Configure apt for Kubernetes 1.26 or 
+Configure apt for Kubernetes 1.28
 ```bash
-sudo mkdir /etc/apt/keyrings
-curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
-echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo mkdir -m 755 /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
+```
+
+- Install Kubernetes components 1.28
+```bash
+sudo apt install -y kubelet=1.28.2-1.1 kubeadm=1.28.2-1.1 kubectl=1.28.2-1.1
+sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
 - Configure apt for Kubernetes 1.29
 ```bash
-sudo mkdir /etc/apt/keyrings
+sudo mkdir -m 755 /etc/apt/keyrings
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
 ```
 
-- Install Kubernetes components 1.26 or 
-```bash
-sudo apt install -y kubelet=1.26.5-00 kubeadm=1.26.5-00 kubectl=1.26.5-00
-```
-
 - Install Kubernetes components 1.29
 ```bash
 sudo apt-get install -y kubelet=1.29.1-1.1 kubeadm=1.29.1-1.1 kubectl=1.29.1-1.1
+sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
 - Pin the versions
@@ -81,6 +90,11 @@ sudo apt-mark hold kubelet kubeadm kubectl
 - Install Docker
 ```bash
 sudo apt install docker.io -y
+```
+
+- Install nfs-common: Only needed for flask-deployment app.
+```bash
+sudo apt-get install nfs-common
 ```
 
 - Create a default configuration file for containerd and save it as config.toml
