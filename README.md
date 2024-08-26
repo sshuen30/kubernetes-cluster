@@ -92,7 +92,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo apt install docker.io -y
 ```
 
-- Install nfs-common: Only needed for flask-deployment app.
+- Install nfs-common: Only needed for flask-cmdhelper deployment app.
 ```bash
 sudo apt-get install nfs-common
 ```
