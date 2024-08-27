@@ -87,14 +87,32 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
-- Install Docker
+Installing containerd runtime for Kubernetes can be done by either:
+
+
+- Option A: Install Docker will also install latest containerd runtime
 ```bash
 sudo apt install docker.io -y
 ```
 
-- Install nfs-common: Only needed for flask-cmdhelper deployment app.
+- Option B (Step1): Install containerd (Use Option B if need to install specific version of containerd to match with other worker nodes
 ```bash
-sudo apt-get install nfs-common
+VERSION="1.7.2"
+wget https://github.com/containerd/containerd/releases/download/v${VERSION}/containerd-${VERSION}-linux-amd64.tar.gz
+sudo tar Cxzvf /usr/local containerd-${VERSION}-linux-amd64.tar.gz
+```
+
+- Option B (Step2): Download and install the systemd service file
+```bash
+wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+sudo mv containerd.service /etc/systemd/system/
+```
+
+- Option B (Step3): Download and install runc
+```bash
+RVERSION="1.1.7"
+wget https://github.com/opencontainers/runc/releases/download/v${RVERSION}/runc.amd64
+sudo install -m 755 runc.amd64 /usr/local/sbin/runc
 ```
 
 - Create a default configuration file for containerd and save it as config.toml
@@ -112,6 +130,10 @@ sudo systemctl restart kubelet.service
 sudo systemctl enable kubelet.service
 ```
 
+- Install nfs-common: Only needed for flask-cmdhelper deployment app.
+```bash
+sudo apt-get install nfs-common
+```
 ------------------------------------------------------------------------------------------------------------
 
 ### 2) Do the following for master node
