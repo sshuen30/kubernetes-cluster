@@ -87,8 +87,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
-Installing containerd runtime for Kubernetes can be done by either:
-
+- Installing containerd runtime for Kubernetes can be done by either:
 
 - Option A: Install Docker will also install latest containerd runtime
 ```bash
