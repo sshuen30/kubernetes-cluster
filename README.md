@@ -22,7 +22,7 @@ sudo hostnamectl set-hostname "worker-node-1"
 
 - Update the /etc/hosts File for Hostname Resolution
 ```bash
-sudo nao /etc/hosts
+sudo nano /etc/hosts
 172.16.44.16 master-node
 172.16.44.17 worker-node-1
 ```
