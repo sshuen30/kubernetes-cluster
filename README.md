@@ -98,7 +98,7 @@ sudo apt install docker.io -y
 ```bash
 VERSION="1.7.2"
 wget https://github.com/containerd/containerd/releases/download/v${VERSION}/containerd-${VERSION}-linux-amd64.tar.gz
-sudo tar Cxzvf /usr/local containerd-${VERSION}-linux-amd64.tar.gz
+sudo tar -zvf containerd-${VERSION}-linux-amd64.tar.gz -C /usr/local
 ```
 
 - Option B (Step2): Download and install the systemd service file
