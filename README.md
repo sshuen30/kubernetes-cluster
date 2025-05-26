@@ -159,7 +159,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
 
 # download the custom resource file for calico
-curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/custom-resources.yaml -O
+curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/custom-resources.yaml -O
 ```
 
 - Use the sed command to change the default CIDR value in the Calico custom resources to match the CIDR you used in the kubeadm init command
