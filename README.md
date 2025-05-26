@@ -164,7 +164,7 @@ curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests
 
 - Use the sed command to change the default CIDR value in the Calico custom resources to match the CIDR you used in the kubeadm init command
 ```bash
-sed -i 's/cidr: 192\.168\.0\.0\/16/cidr: 10.10.0.0\/16/g' custom-resources.yaml
+sed -i 's#cidr: 192\.168\.0\.0/16#cidr: 10.10.0.0/16#g' custom-resources.yaml
 ```
 
 - Tell kubectl to create the resources defined in the custom-resources.yaml file
